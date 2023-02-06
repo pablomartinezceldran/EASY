@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Modal,
   View,
@@ -98,6 +98,9 @@ export default function NewTaskFormModal({
             <View style={styles.section}>
               <Text style={styles.header}>Title:</Text>
               <TextInput
+                ref={(input) => {
+                  input?.focus();
+                }}
                 placeholder='Title'
                 value={title}
                 onChangeText={(text) => setTitle(text)}
