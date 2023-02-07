@@ -50,7 +50,11 @@ export default function NewTaskFormModal({
         relevance
       );
       AsyncStorage.getItem("tasks").then((tasks) => {
-        if (tasks) {
+        if (!tasks) {
+          AsyncStorage.setItem("tasks", JSON.stringify([newTask]));
+          updateTasks();
+          closeModal(false);
+        } else {
           const tasksArray = JSON.parse(tasks);
           tasksArray.push(newTask);
           AsyncStorage.setItem("tasks", JSON.stringify(tasksArray));

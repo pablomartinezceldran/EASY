@@ -48,7 +48,7 @@ export default function TaskCard({
       onPress={() => showTaskDetails(task)}
       onLongPress={() => showDeleteOption()}
     >
-      <View style={styles.header} onResponderMove={() => console.log("algo")}>
+      <View style={styles.header}>
         <Text style={styles.title}>{task.title}</Text>
         <View
           style={[
