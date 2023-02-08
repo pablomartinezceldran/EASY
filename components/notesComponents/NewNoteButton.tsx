@@ -11,7 +11,6 @@ export default function NewNoteButton({ updateNotes }: { updateNotes: Function }
     const newNote = createNewNote("", "", randomColor());
     AsyncStorage.getItem("notes").then((notes) => {
       if (!notes) {
-        console.log("no hay notas");
         AsyncStorage.setItem("notes", JSON.stringify([newNote]));
         updateNotes();
       } else {
