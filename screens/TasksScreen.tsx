@@ -26,14 +26,6 @@ export default function TasksScreen() {
     setRefreshing(false);
   }, []);
 
-  function loadTasks() {
-    AsyncStorage.getItem("tasks").then((tasks) => {
-      if (tasks) {
-        setTasks(JSON.parse(tasks));
-      }
-    });
-  }
-
   function deleteTask(id: string | undefined) {
     AsyncStorage.getItem("tasks").then((tasks) => {
       if (tasks) {
@@ -41,7 +33,7 @@ export default function TasksScreen() {
         const newTasksArray = tasksArray.filter((task: any) => task.id != id);
         AsyncStorage.setItem("tasks", JSON.stringify(newTasksArray));
         setTaskDetails(undefined);
-        loadTasks();
+        orderTasks();
       }
     });
   }
@@ -103,7 +95,7 @@ export default function TasksScreen() {
     <View style={styles.container}>
       <StatusBar style='auto' />
       {showNewTaskForm ? (
-        <NewTaskFormModal updateTasks={loadTasks} closeModal={setShowNewTaskForm} />
+        <NewTaskFormModal updateTasks={orderTasks} closeModal={setShowNewTaskForm} />
       ) : (
         <>
           {taskDetails ? (
