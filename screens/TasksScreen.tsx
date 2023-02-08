@@ -22,7 +22,7 @@ export default function TasksScreen() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    changeOrder();
+    orderTasks();
     setRefreshing(false);
   }, []);
 
