@@ -18,7 +18,7 @@ export default function TasksScreen() {
   const [showNewTaskForm, setShowNewTaskForm] = useState(false);
   const [taskDetails, setTaskDetails] = useState<Task>();
 
-  const [order, setOrder] = useState("relevance");
+  const [order, setOrder] = useState("date");
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
