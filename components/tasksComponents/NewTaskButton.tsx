@@ -17,15 +17,11 @@ export default function NewTaskButton({
 
 const styles = StyleSheet.create({
   newTaskButton: {
-    position: "absolute",
-    bottom: 16,
-    right: 16,
+    backgroundColor: colors.main,
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: colors.main,
     alignItems: "center",
     justifyContent: "center",
-    elevation: 8,
   },
 });

@@ -5,8 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { colors } from "../constants/colors";
 
-import NewTaskButton from "../components/tasksComponents/NewTaskButton";
 import TaskCard from "../components/tasksComponents/TaskCard";
+import ButtonsMenu from "../components/tasksComponents/ButtonsMenu";
 import NewTaskFormModal from "../components/tasksComponents/NewTaskFormModal";
 import TaskDetailsModal from "../components/tasksComponents/TaskDetailsModal";
 
@@ -18,9 +18,11 @@ export default function TasksScreen() {
   const [showNewTaskForm, setShowNewTaskForm] = useState(false);
   const [taskDetails, setTaskDetails] = useState<Task>();
 
+  const [order, setOrder] = useState("relevance");
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    loadTasks();
+    changeOrder();
     setRefreshing(false);
   }, []);
 
@@ -52,9 +54,50 @@ export default function TasksScreen() {
     setTaskDetails(task);
   };
 
+  function orderTasks() {
+    AsyncStorage.getItem("tasks").then((tasks) => {
+      if (tasks) {
+        const tasksArray = JSON.parse(tasks);
+        switch (order) {
+          case "relevance":
+            tasksArray.sort((a: any, b: any) => {
+              if (a.relevance > b.relevance) {
+                return -1;
+              }
+              if (a.relevance < b.relevance) {
+                return 1;
+              }
+              return 0;
+            });
+            break;
+          case "date":
+            tasksArray.sort((a: any, b: any) => {
+              if (new Date(b.dueDate).getTime() > new Date(a.dueDate).getTime()) {
+                return -1;
+              }
+              if (new Date(b.dueDate).getTime() < new Date(a.dueDate).getTime()) {
+                return 1;
+              }
+              return 0;
+            });
+            break;
+        }
+        setTasks(tasksArray);
+      }
+    });
+  }
+
+  function changeOrder() {
+    if (order == "relevance") {
+      setOrder("date");
+    } else {
+      setOrder("relevance");
+    }
+  }
+
   useEffect(() => {
-    loadTasks();
-  }, []);
+    orderTasks();
+  }, [order]);
 
   return (
     <View style={styles.container}>
@@ -86,7 +129,11 @@ export default function TasksScreen() {
                 keyExtractor={(item) => item.id}
                 style={styles.list}
               />
-              <NewTaskButton showNewTaskForm={setShowNewTaskForm} />
+              <ButtonsMenu
+                orderTasks={changeOrder}
+                order={order}
+                showNewTaskForm={setShowNewTaskForm}
+              />
             </>
           )}
         </>
