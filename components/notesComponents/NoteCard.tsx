@@ -4,7 +4,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Note } from "../../scripts/notes";
 import Icon from "@expo/vector-icons/FontAwesome5";
+
 import { colors } from "../../constants/colors";
+import { cardColors } from "../../constants/cardColors";
 
 export default function NoteCard({
   note,
@@ -57,7 +59,7 @@ export default function NoteCard({
   }
 
   function randomColor() {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+    return cardColors[Math.floor(Math.random() * cardColors.length)];
   }
 
   return (

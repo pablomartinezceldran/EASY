@@ -1,0 +1,18 @@
+export const cardColors = [
+  "#FF4136",
+  "#FFDC00",
+  "#2ECC40",
+  "#0074D9",
+  "#B10DC9",
+  "#FF851B",
+  "#39CCCC",
+  "#FF69B4",
+  "#01FF70",
+  "#7FDBFF",
+  "#F012BE",
+  "#3D9970",
+  "#85144b",
+  "#001f3f",
+  "#AAAAAA",
+  "#DDDDDD",
+];
