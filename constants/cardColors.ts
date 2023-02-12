@@ -12,7 +12,6 @@ export const cardColors = [
   "#F012BE",
   "#3D9970",
   "#85144b",
-  "#001f3f",
   "#AAAAAA",
   "#DDDDDD",
 ];

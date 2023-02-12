@@ -16,7 +16,7 @@ export default function MainRouter() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName='Tasks'
+        initialRouteName='ShoppingList'
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
             let iconName;
